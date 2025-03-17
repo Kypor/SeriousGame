@@ -83,6 +83,8 @@ public class PlayerInteract : MonoBehaviour
         {
             Vector3 newPosition = Vector3.Lerp(grabbableRb.position, holder.position, Time.deltaTime * lerpSpeed);
             grabbableRb.MovePosition(newPosition);
+            Quaternion newQuaternion = Quaternion.Lerp(grabbableRb.rotation, holder.rotation, lerpSpeed);
+            grabbableRb.MoveRotation(newQuaternion);
         }
     }
 }
