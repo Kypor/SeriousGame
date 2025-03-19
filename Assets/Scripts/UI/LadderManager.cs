@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class LadderManager : MonoBehaviour
@@ -8,4 +9,11 @@ public class LadderManager : MonoBehaviour
     {
         onLadder = false;
     }
+
+    void Update()
+    {
+       
+    }
+
+   
 }

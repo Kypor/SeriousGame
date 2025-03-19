@@ -13,6 +13,7 @@ public class PlayerInteract : MonoBehaviour
     public Camera cam;
 
     PlayerUI playerUI;
+    LadderManager ladderManager;
 
     [Header("Grabbing")]
     Grabbable grabbable;
@@ -26,6 +27,7 @@ public class PlayerInteract : MonoBehaviour
     {
         inHand = false;
         playerUI = FindAnyObjectByType<PlayerUI>();
+        ladderManager = FindAnyObjectByType<LadderManager>();
     }
 
     // Update is called once per frame
@@ -38,7 +40,7 @@ public class PlayerInteract : MonoBehaviour
         if(Physics.Raycast(origin, forward, out RaycastHit hit, raycastDistance, interactable))
         {
             //Debug.Log("Interazione");
-            if(inHand == false)
+            if(inHand == false && ladderManager.onLadder == false)
             {
                 if(hit.collider.GetComponent<Interactable>() != null)
                 {
@@ -91,4 +93,7 @@ public class PlayerInteract : MonoBehaviour
             grabbableRb.MoveRotation(newQuaternion);
         }
     }
+
+
+
 }

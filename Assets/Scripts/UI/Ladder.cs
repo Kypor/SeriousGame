@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Ladder : Interactable
@@ -45,6 +46,11 @@ public class Ladder : Interactable
     {
         playerUI.UpdateText(string.Empty);
         interaction = true;
+        playerMovement.rb.useGravity = false;
 
     }
+
+
+
+
 }

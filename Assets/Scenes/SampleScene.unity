@@ -531,6 +531,59 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &126242448
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 126242449}
+  - component: {fileID: 126242451}
+  m_Layer: 7
+  m_Name: Collider
+  m_TagString: 5
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &126242449
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 126242448}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 7.69, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2058738847}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &126242451
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 126242448}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.47, y: 1, z: 5.86}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &157462934
 GameObject:
   m_ObjectHideFlags: 0
@@ -1062,7 +1115,7 @@ GameObject:
   - component: {fileID: 390269380}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1098,8 +1151,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd812ebe69da69c41a4dd6e03c17e97b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 7
+  moveSpeed: 8
+  moveSpeedLadder: 2
   groundDrag: 10
+  airDrag: 1
   jumpForce: 8
   jumpCooldown: 0.25
   airMultiplier: 0.1
@@ -1140,7 +1195,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 390269374}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 1.25
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -7457,7 +7512,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Giacomo
+  m_text: 1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -7593,7 +7648,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Come si chiama gigions?
+  m_text: Quanti peni ha un essere umano?
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -7750,13 +7805,16 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8052766417453596700, guid: dfd2e1a99c05cc14faa8603de91b6ac4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1876497105}
+    - targetCorrespondingSourceObject: {fileID: 8052766417453596700, guid: dfd2e1a99c05cc14faa8603de91b6ac4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 126242449}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7244880889475504806, guid: dfd2e1a99c05cc14faa8603de91b6ac4, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2058738851}
+      addedObject: {fileID: 2058738850}
     - targetCorrespondingSourceObject: {fileID: 7244880889475504806, guid: dfd2e1a99c05cc14faa8603de91b6ac4, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2058738850}
+      addedObject: {fileID: 2058738854}
   m_SourcePrefab: {fileID: 100100000, guid: dfd2e1a99c05cc14faa8603de91b6ac4, type: 3}
 --- !u!4 &2058738847 stripped
 Transform:
@@ -7778,8 +7836,8 @@ MonoBehaviour:
   promptMessage: '[E] Sali'
   lerpSpeed: 5
   distance: 1.25
---- !u!136 &2058738851
-CapsuleCollider:
+--- !u!65 &2058738854
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -7796,10 +7854,8 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.8729335
-  m_Height: 10.541015
-  m_Direction: 1
+  serializedVersion: 3
+  m_Size: {x: 1.657006, y: 10.541015, z: 1.745867}
   m_Center: {x: 0.0010049641, y: 5.271445, z: 0.00002014637}
 --- !u!1 &2109284166
 GameObject:

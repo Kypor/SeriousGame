@@ -10,8 +10,10 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Movement")]
     public float moveSpeed;
+    public float moveSpeedLadder;
 
     public float groundDrag;
+    public float airDrag = 0f;
 
     public float jumpForce;
     public float jumpCooldown;
@@ -59,6 +61,7 @@ public class PlayerMovement : MonoBehaviour
         grounded = Physics.Raycast(origin, Vector3.down, rayHeight, whatIsGround);
 
 
+
         Debug.DrawRay(origin, Vector3.down * rayHeight);
 
         MyInput();
@@ -67,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
         if (grounded)
             rb.linearDamping = groundDrag;
         else
-            rb.linearDamping = 0f;
+            rb.linearDamping = airDrag;
     }
 
     private void FixedUpdate()
@@ -100,8 +103,10 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (ladderManager.onLadder == true)
         {
-            Debug.Log("Qualcosetta");
-            rb.AddForce(moveDirection.normalized * moveSpeed * -10f, ForceMode.Force);
+            
+            rb.linearDamping = 5f;
+            moveDirection = orientation.up * verticalInput;
+            rb.AddForce(moveDirection.normalized * moveSpeedLadder * 10f, ForceMode.Force);
         }
 
         else if (grounded)
@@ -175,6 +180,17 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 GetSlopeMoveDirection()
     {
         return Vector3.ProjectOnPlane(moveDirection, slopeHit.normal).normalized;
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "5")
+        {
+            Debug.Log("Culo");
+            ladderManager.onLadder = false;
+            rb.useGravity = true;
+
+        }
     }
 
 
