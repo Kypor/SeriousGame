@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
 
-
+    LadderManager ladderManager;
 
     Animator animator;
 
@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
 
     Vector3 moveDirection;
 
-    Rigidbody rb;
+    public Rigidbody rb;
 
 
 
@@ -45,6 +45,8 @@ public class PlayerMovement : MonoBehaviour
     {
         animator = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody>();
+        ladderManager = FindAnyObjectByType<LadderManager>();
+
         rb.freezeRotation = true;
 
         readyToJump = true;
@@ -55,6 +57,7 @@ public class PlayerMovement : MonoBehaviour
         float rayHeight = playerHeight * 0.5f + 0.2f;
         Vector3 origin = new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z);
         grounded = Physics.Raycast(origin, Vector3.down, rayHeight, whatIsGround);
+
 
         Debug.DrawRay(origin, Vector3.down * rayHeight);
 
@@ -82,6 +85,7 @@ public class PlayerMovement : MonoBehaviour
             readyToJump = false;
             Jump();
 
+
             Invoke(nameof(ResetJump), jumpCooldown);
         }
     }
@@ -93,6 +97,11 @@ public class PlayerMovement : MonoBehaviour
         if (OnSlope())
         {
             rb.AddForce(GetSlopeMoveDirection() * moveSpeed * 10f, ForceMode.Force);
+        }
+        else if (ladderManager.onLadder == true)
+        {
+            Debug.Log("Qualcosetta");
+            rb.AddForce(moveDirection.normalized * moveSpeed * -10f, ForceMode.Force);
         }
 
         else if (grounded)
@@ -167,5 +176,7 @@ public class PlayerMovement : MonoBehaviour
     {
         return Vector3.ProjectOnPlane(moveDirection, slopeHit.normal).normalized;
     }
+
+
 
 }
