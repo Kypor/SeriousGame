@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-
+    public float groundColliderHeight = 0.025f;
     LadderManager ladderManager;
 
     Animator animator;
@@ -40,11 +40,13 @@ public class PlayerMovement : MonoBehaviour
     Vector3 moveDirection;
 
     public Rigidbody rb;
+    private Collider playerCollider;
 
 
 
     private void Start()
     {
+        playerCollider = GetComponentInChildren<Collider>();
         animator = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody>();
         ladderManager = FindAnyObjectByType<LadderManager>();
@@ -58,11 +60,14 @@ public class PlayerMovement : MonoBehaviour
     {
         float rayHeight = playerHeight * 0.5f + 0.2f;
         Vector3 origin = new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z);
-        grounded = Physics.Raycast(origin, Vector3.down, rayHeight, whatIsGround);
+        //grounded = Physics.Raycast(origin, Vector3.down, rayHeight, whatIsGround);
+
+        Vector3 halfExtents = playerCollider.bounds.extents;
+        halfExtents.y = groundColliderHeight;
+        grounded = Physics.BoxCast(playerCollider.bounds.center, halfExtents, Vector3.down, transform.rotation, 1f, whatIsGround);
 
 
-
-        Debug.DrawRay(origin, Vector3.down * rayHeight);
+        //Debug.DrawRay(origin, Vector3.down * rayHeight);
 
         MyInput();
         SpeedControl();
@@ -192,6 +197,13 @@ public class PlayerMovement : MonoBehaviour
 
         }
     }
+
+    void OnDrawGizmos()
+    {
+        
+    }
+
+
 
 
 

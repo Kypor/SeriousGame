@@ -18,6 +18,8 @@ public class QuestionManager : MonoBehaviour
     public int numberRight;
     public int numberWrong;
 
+    public bool questionMenu;
+
 
     void Awake()
     {
@@ -33,6 +35,7 @@ public class QuestionManager : MonoBehaviour
         playerMovement = FindAnyObjectByType<PlayerMovement>();
         playerCam = FindAnyObjectByType<PlayerCam>();
         playerCam.enabled = true;
+        questionMenu = false;
         
     }
 
@@ -53,6 +56,8 @@ public class QuestionManager : MonoBehaviour
 
        Cursor.visible = true;
        Cursor.lockState = CursorLockMode.None;
+
+       questionMenu = true;
     }
 
     public void CloseMenu()
@@ -64,6 +69,8 @@ public class QuestionManager : MonoBehaviour
 
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+
+        questionMenu = false;
     }
 
     public void RightAnswer()

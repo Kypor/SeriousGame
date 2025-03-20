@@ -5,6 +5,7 @@ public class PlayerInteract : MonoBehaviour
 {
 
     private const int count = 2;
+    PlayerMovement playerMovement;
 
     public LayerMask interactable;
     
@@ -28,6 +29,7 @@ public class PlayerInteract : MonoBehaviour
         inHand = false;
         playerUI = FindAnyObjectByType<PlayerUI>();
         ladderManager = FindAnyObjectByType<LadderManager>();
+        playerMovement = GetComponent<PlayerMovement>();
     }
 
     // Update is called once per frame
@@ -40,7 +42,7 @@ public class PlayerInteract : MonoBehaviour
         if(Physics.Raycast(origin, forward, out RaycastHit hit, raycastDistance, interactable))
         {
             //Debug.Log("Interazione");
-            if(inHand == false && ladderManager.onLadder == false)
+            if(inHand == false && ladderManager.onLadder == false && playerMovement.grounded == true)
             {
                 if(hit.collider.GetComponent<Interactable>() != null)
                 {
@@ -62,6 +64,7 @@ public class PlayerInteract : MonoBehaviour
                         grabbableRb.rotation = holder.rotation;
                         Debug.Log("Test");
                         grabbable.BaseInteract();
+
                     }
                     
                 }

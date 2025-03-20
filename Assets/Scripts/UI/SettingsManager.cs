@@ -7,6 +7,8 @@ public class SettingsManager : MonoBehaviour
     [SerializeField] GameObject settingsPanel;
     PlayerCam playerCam;
 
+    QuestionManager questionManager;
+
 
     void Awake()
     {
@@ -17,12 +19,13 @@ public class SettingsManager : MonoBehaviour
     {
         playerCam = FindAnyObjectByType<PlayerCam>();
         playerCam.enabled = true;
+        questionManager = FindAnyObjectByType<QuestionManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if(Input.GetKeyDown(KeyCode.Escape) && questionManager.questionMenu == false)
         {
             if(inMenu)
             {
