@@ -47,6 +47,7 @@ public class QuestionManager : MonoBehaviour
 
     public void OpenMenu()
     {
+        
        playerCam.enabled = false;
        playerMovement.enabled = false;
        //Time.timeScale = 0;

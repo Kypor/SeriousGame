@@ -8,6 +8,7 @@ public class PlayerInteract : MonoBehaviour
     PlayerMovement playerMovement;
 
     public LayerMask interactable;
+    public LayerMask grabbableLayer;
     
 
     public bool inHand;
@@ -19,13 +20,17 @@ public class PlayerInteract : MonoBehaviour
     [Header("Grabbing")]
     Grabbable grabbable;
     Rigidbody grabbableRb;
+    Collider grabbableCollider;
     public Transform holder;
     [SerializeField] float lerpSpeed = 10f;
 
     [SerializeField] float raycastDistance;
+
+    QuestionManager questionManager;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        questionManager = FindAnyObjectByType<QuestionManager>();
         inHand = false;
         playerUI = FindAnyObjectByType<PlayerUI>();
         ladderManager = FindAnyObjectByType<LadderManager>();
@@ -42,7 +47,7 @@ public class PlayerInteract : MonoBehaviour
         if(Physics.Raycast(origin, forward, out RaycastHit hit, raycastDistance, interactable))
         {
             //Debug.Log("Interazione");
-            if(inHand == false && ladderManager.onLadder == false && playerMovement.grounded == true)
+            if(inHand == false && ladderManager.onLadder == false && playerMovement.grounded == true && questionManager.questionMenu == false)
             {
                 if(hit.collider.GetComponent<Interactable>() != null)
                 {
@@ -58,10 +63,12 @@ public class PlayerInteract : MonoBehaviour
                 {
                     grabbable = hit.collider.GetComponent<Grabbable>();
                     grabbableRb = hit.collider.GetComponent<Rigidbody>();
+                    grabbableCollider = grabbable.GetComponent<Collider>();
                     
                     if(Input.GetKeyDown(KeyCode.E))
                     {
-                        grabbableRb.rotation = holder.rotation;
+                        grabbableRb.rotation = holder.rotation;                        
+                        grabbableCollider.enabled = false;
                         Debug.Log("Test");
                         grabbable.BaseInteract();
 
@@ -81,6 +88,8 @@ public class PlayerInteract : MonoBehaviour
             if(Input.GetKey(KeyCode.Q))
             {
                 grabbable.Drop();
+                grabbableCollider.enabled = true;
+                //grabbable.gameObject.layer = interactable;
             }
         }
 
@@ -94,6 +103,7 @@ public class PlayerInteract : MonoBehaviour
             grabbableRb.MovePosition(newPosition);
             Quaternion newQuaternion = Quaternion.Lerp(grabbableRb.rotation, holder.rotation, lerpSpeed);
             grabbableRb.MoveRotation(newQuaternion);
+            
         }
     }
 

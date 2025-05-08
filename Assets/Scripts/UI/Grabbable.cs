@@ -22,6 +22,7 @@ public class Grabbable : Interactable
     protected override void Interact()
     {
         playerUI.UpdateText(string.Empty);
+        gameObject.layer = LayerMask.NameToLayer("Grabbable");
         rb.useGravity = false;
         rb.isKinematic = true;
         playerInteract.inHand = true;   
@@ -31,6 +32,7 @@ public class Grabbable : Interactable
 
     public void Drop()
     {
+        gameObject.layer = LayerMask.NameToLayer("Interactable");
         playerInteract.inHand = false;
         rb.useGravity = true;
         rb.isKinematic = false;
