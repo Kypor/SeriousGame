@@ -64,6 +64,7 @@ public class PlayerInteract : MonoBehaviour
                     grabbable = hit.collider.GetComponent<Grabbable>();
                     grabbableRb = hit.collider.GetComponent<Rigidbody>();
                     grabbableCollider = grabbable.GetComponent<Collider>();
+
                     
                     if(Input.GetKeyDown(KeyCode.E))
                     {
