@@ -69,8 +69,8 @@ public class PlayerInteract : MonoBehaviour
                     if(Input.GetKeyDown(KeyCode.E))
                     {
                         grabbableRb.rotation = holder.rotation;                        
-                        grabbableCollider.enabled = false;
-                        Debug.Log("Test");
+                        //grabbableCollider.enabled = true;
+                        grabbableCollider.isTrigger = true;
                         grabbable.BaseInteract();
 
                     }
@@ -89,7 +89,8 @@ public class PlayerInteract : MonoBehaviour
             if(Input.GetKey(KeyCode.Q))
             {
                 grabbable.Drop();
-                grabbableCollider.enabled = true;
+                //grabbableCollider.enabled = true;
+                grabbableCollider.isTrigger = false;
                 //grabbable.gameObject.layer = interactable;
             }
         }

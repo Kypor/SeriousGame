@@ -40,6 +40,7 @@ public class SettingsManager : MonoBehaviour
 
     public void OpenMenu()
     {
+       
        inMenu = true;
        playerCam.enabled = false;
        Time.timeScale = 0;

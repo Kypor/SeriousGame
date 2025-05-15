@@ -2,10 +2,11 @@ using UnityEngine;
 
 public class Altar : MonoBehaviour
 {
+    public GameObject timeline;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        timeline.SetActive(false);
     }
 
     // Update is called once per frame
@@ -18,7 +19,7 @@ public class Altar : MonoBehaviour
     {
         if (collision.gameObject.tag == "Piuma")
         {
-            Debug.Log("Giusto");
+            timeline.SetActive(true);
         }
         else if (collision.gameObject.tag == "Player")
         {
