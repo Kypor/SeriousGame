@@ -4,6 +4,7 @@ namespace JusticeScale.Scripts.Scales
 {
     public abstract class Scale : MonoBehaviour
     {
+        public bool rightObject;
         public abstract float TotalWeight { get; }
         [SerializeField] protected LayerMask layerMask = -1; // LayerMask specifying which layers to include in the scale detection
 

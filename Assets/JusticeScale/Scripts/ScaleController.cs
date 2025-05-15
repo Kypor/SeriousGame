@@ -32,7 +32,12 @@ namespace JusticeScale.Scripts
         [SerializeField] [Tooltip("Internal smoothed result for the balance. Used for gradual balance adjustments.")]
         private float weightResultSmoothed;
 
-        public GameObject timelineAnubis;
+        public TimelineManager timelineManager;
+
+        void Start()
+        {
+            timelineManager = FindAnyObjectByType<TimelineManager>();
+        }
 
         private void Update()
         {
@@ -43,9 +48,9 @@ namespace JusticeScale.Scripts
             }
             
             UpdateBalance();
-            if(leftScale.TotalWeight == 1 && rightScale.TotalWeight == 1)
+            if(leftScale.TotalWeight == 1 && rightScale.TotalWeight == 1 && rightScale.rightObject == true)
             {
-                Debug.Log("Funziona");
+                timelineManager.AnubisTimeline();
             }
         }
 

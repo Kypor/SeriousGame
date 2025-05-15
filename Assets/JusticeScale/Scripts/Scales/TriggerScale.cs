@@ -17,11 +17,13 @@ namespace JusticeScale.Scripts.Scales
         private HashSet<Transform> _detectedObjects = new HashSet<Transform>();
 
 
+
         private void Start()
         {
             // Initialize the object container at the start
             _objectContainer = new GameObject("Objects Container");
             _objectContainer.transform.parent = transform;
+            rightObject = false;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -29,10 +31,15 @@ namespace JusticeScale.Scripts.Scales
             var rb = other.GetComponent<Rigidbody>();
             if (rb != null && IsInDetectableLayer(other.gameObject) && _detectedObjects.Add(rb.transform))
             {
-                //AddObjectToContainer(rb.transform);
+                AddObjectToContainer(rb.transform);
                 weight += rb.mass;
                 // Round the total weight to 2 decimal places
                 weight = Mathf.Round(weight * 100f) / 100f;
+
+                if(other.tag == "Piuma")
+                {
+                    rightObject = true;
+                }
 
             }
         }
@@ -47,7 +54,13 @@ namespace JusticeScale.Scripts.Scales
                 weight = Mathf.Max(0, weight);
                 weight = Mathf.Round(weight * 100f) / 100f;
 
-                //RemoveObjectFromContainer(rb.transform);
+                if(other.tag == "Piuma")
+                {
+                    rightObject = false;
+                }
+
+
+                RemoveObjectFromContainer(rb.transform);
 
             }
         }
@@ -72,7 +85,7 @@ namespace JusticeScale.Scripts.Scales
             if (_objectContainer != null) objectTransform.parent = null;
 
             // Destroy the container if it has no child objects left
-            if (_objectContainer.transform.childCount == 0) Destroy(_objectContainer);
+            //if (_objectContainer.transform.childCount == 0) Destroy(_objectContainer);
         }
         
         private bool IsInDetectableLayer(GameObject obj)

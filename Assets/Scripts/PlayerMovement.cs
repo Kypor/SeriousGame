@@ -106,13 +106,13 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.AddForce(GetSlopeMoveDirection() * moveSpeed * 10f, ForceMode.Force);
         }
-        else if (ladderManager.onLadder == true)
+        /*else if (ladderManager.onLadder == true)
         {
             
             rb.linearDamping = 5f;
             moveDirection = orientation.up * verticalInput;
             rb.AddForce(moveDirection.normalized * moveSpeedLadder * 10f, ForceMode.Force);
-        }
+        }*/
 
         else if (grounded)
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);

@@ -16,6 +16,7 @@ public class Grabbable : Interactable
         playerUI = FindAnyObjectByType<PlayerUI>();
         playerInteract = FindFirstObjectByType<PlayerInteract>();
         rb = GetComponent<Rigidbody>();
+        rb.interpolation = RigidbodyInterpolation.None;
 
     }
 
@@ -27,6 +28,7 @@ public class Grabbable : Interactable
         gameObject.layer = LayerMask.NameToLayer("Grabbable");
         rb.useGravity = false;
         rb.isKinematic = true;
+        rb.interpolation = RigidbodyInterpolation.Interpolate;
         playerInteract.inHand = true;   
         
         
@@ -38,6 +40,7 @@ public class Grabbable : Interactable
         playerInteract.inHand = false;
         rb.useGravity = true;
         rb.isKinematic = false;
+        rb.interpolation = RigidbodyInterpolation.None;
     }
 
 }
