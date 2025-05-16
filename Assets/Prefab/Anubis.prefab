@@ -64,6 +64,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 692463394353215994, guid: 7e209ec486e3aea49bc139eed87007db, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 7e209ec486e3aea49bc139eed87007db, type: 3}
       propertyPath: m_Name
       value: Anubis
@@ -127,6 +131,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2761aacb89229f04a9c17d90726105ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collisionName: 
+  greenMaterial: {fileID: 0}
+  wrongMaterial: {fileID: 0}
 --- !u!65 &5045148460635169385
 BoxCollider:
   m_ObjectHideFlags: 0
