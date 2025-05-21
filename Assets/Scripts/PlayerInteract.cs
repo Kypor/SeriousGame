@@ -15,7 +15,6 @@ public class PlayerInteract : MonoBehaviour
     public Camera cam;
 
     PlayerUI playerUI;
-    LadderManager ladderManager;
 
     [Header("Grabbing")]
     Grabbable grabbable;
@@ -33,7 +32,6 @@ public class PlayerInteract : MonoBehaviour
         questionManager = FindAnyObjectByType<QuestionManager>();
         inHand = false;
         playerUI = FindAnyObjectByType<PlayerUI>();
-        ladderManager = FindAnyObjectByType<LadderManager>();
         playerMovement = GetComponent<PlayerMovement>();
     }
 
@@ -47,12 +45,12 @@ public class PlayerInteract : MonoBehaviour
         if(Physics.Raycast(origin, forward, out RaycastHit hit, raycastDistance, interactable))
         {
             //Debug.Log("Interazione");
-            if(inHand == false && ladderManager.onLadder == false && playerMovement.grounded == true && questionManager.questionMenu == false)
+            if(inHand == false && playerMovement.grounded == true && questionManager.questionMenu == false)
             {
                 if(hit.collider.GetComponent<Interactable>() != null)
                 {
                     Interactable interactable = hit.collider.GetComponent<Interactable>();
-                    playerUI.UpdateText(interactable.promptMessage);
+                    playerUI.UpdateText("[E] " + interactable.promptMessage);
                     if(Input.GetKeyDown(KeyCode.E))
                     {
                         interactable.BaseInteract();

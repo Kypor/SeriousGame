@@ -3,15 +3,14 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public Rigidbody rb;
+    public Transform orientation;
     public float groundColliderHeight = 0.025f;
-    LadderManager ladderManager;
 
     Animator animator;
 
     [Header("Movement")]
     public float moveSpeed;
-    public float moveSpeedLadder;
-
     public float groundDrag;
     public float airDrag = 0f;
 
@@ -32,14 +31,15 @@ public class PlayerMovement : MonoBehaviour
     public float maxSlopeAngle;
     private RaycastHit slopeHit;
 
-    public Transform orientation;
+
+
 
     float horizontalInput;
     float verticalInput;
 
     Vector3 moveDirection;
 
-    public Rigidbody rb;
+
     private Collider playerCollider;
 
 
@@ -49,11 +49,11 @@ public class PlayerMovement : MonoBehaviour
         playerCollider = GetComponentInChildren<Collider>();
         animator = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody>();
-        ladderManager = FindAnyObjectByType<LadderManager>();
 
         rb.freezeRotation = true;
 
         readyToJump = true;
+
     }
 
     private void Update()
@@ -81,6 +81,7 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         MovePlayer();
+
     }
 
     private void MyInput()
@@ -106,13 +107,7 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.AddForce(GetSlopeMoveDirection() * moveSpeed * 10f, ForceMode.Force);
         }
-        /*else if (ladderManager.onLadder == true)
-        {
-            
-            rb.linearDamping = 5f;
-            moveDirection = orientation.up * verticalInput;
-            rb.AddForce(moveDirection.normalized * moveSpeedLadder * 10f, ForceMode.Force);
-        }*/
+
 
         else if (grounded)
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
@@ -187,20 +182,13 @@ public class PlayerMovement : MonoBehaviour
         return Vector3.ProjectOnPlane(moveDirection, slopeHit.normal).normalized;
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "5")
-        {
-            Debug.Log("Culo");
-            ladderManager.onLadder = false;
-            rb.useGravity = true;
 
-        }
-    }
+
+
 
     void OnDrawGizmos()
     {
-        
+
     }
 
 

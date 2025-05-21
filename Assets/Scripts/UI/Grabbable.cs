@@ -3,7 +3,6 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Grabbable : Interactable
 {
-    
     PlayerUI playerUI;
     PlayerInteract playerInteract;
 

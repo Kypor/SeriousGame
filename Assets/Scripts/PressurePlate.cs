@@ -57,7 +57,6 @@ public class PressurePlate : MonoBehaviour
                         else
                         {
                             ApplyAllObjects();
-                            Debug.Log("Coglione");
                             counter = 0;
                         }
                         break;
@@ -75,7 +74,6 @@ public class PressurePlate : MonoBehaviour
                         else
                         {
                             ApplyAllObjects();
-                            Debug.Log("Coglione");
                             counter = 0;
                         }
                         break;
@@ -93,7 +91,6 @@ public class PressurePlate : MonoBehaviour
                         else
                         {
                             ApplyAllObjects();
-                            Debug.Log("Coglione");
                             counter = 0;
                         }
                         break;
@@ -112,7 +109,6 @@ public class PressurePlate : MonoBehaviour
                         else
                         {
                             ApplyAllObjects();
-                            Debug.Log("Coglione");
                             counter = 0;
                         }
                         break;
