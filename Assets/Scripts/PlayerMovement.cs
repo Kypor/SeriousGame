@@ -5,6 +5,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public Rigidbody rb;
     public Transform orientation;
+    [SerializeField] Collider cameraCollider;
     public float groundColliderHeight = 0.025f;
 
     Animator animator;
@@ -73,9 +74,17 @@ public class PlayerMovement : MonoBehaviour
         SpeedControl();
 
         if (grounded)
+        {
             rb.linearDamping = groundDrag;
+            cameraCollider.enabled = true;
+        }
+
         else
+        {
             rb.linearDamping = airDrag;
+            cameraCollider.enabled = false;
+        }
+            
     }
 
     private void FixedUpdate()

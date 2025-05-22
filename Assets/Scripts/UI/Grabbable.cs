@@ -4,7 +4,8 @@ using UnityEngine;
 public class Grabbable : Interactable
 {
     PlayerUI playerUI;
-    PlayerInteract playerInteract;
+    //PlayerInteract playerInteract;
+    PlaInt plaInt;
 
     Rigidbody rb;
 
@@ -13,13 +14,14 @@ public class Grabbable : Interactable
     void Start()
     {
         playerUI = FindAnyObjectByType<PlayerUI>();
-        playerInteract = FindFirstObjectByType<PlayerInteract>();
+        plaInt = FindAnyObjectByType<PlaInt>();
+        //playerInteract = FindFirstObjectByType<PlayerInteract>();
         rb = GetComponent<Rigidbody>();
         rb.interpolation = RigidbodyInterpolation.None;
 
     }
 
-        
+
 
     protected override void Interact()
     {
@@ -28,7 +30,8 @@ public class Grabbable : Interactable
         rb.useGravity = false;
         rb.isKinematic = true;
         rb.interpolation = RigidbodyInterpolation.Interpolate;
-        playerInteract.inHand = true;   
+        //playerInteract.inHand = true;   
+        plaInt.inHand = true;
         
         
     }
@@ -36,7 +39,8 @@ public class Grabbable : Interactable
     public void Drop()
     {
         gameObject.layer = LayerMask.NameToLayer("Interactable");
-        playerInteract.inHand = false;
+        //playerInteract.inHand = false;
+        plaInt.inHand = false;
         rb.useGravity = true;
         rb.isKinematic = false;
         rb.interpolation = RigidbodyInterpolation.None;
