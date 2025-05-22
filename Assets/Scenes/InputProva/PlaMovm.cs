@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class PlaMovm : MonoBehaviour
 {
-    Animator animator;
     public CharacterController controller;
     public float speed = 12f;
     public float gravity = -9.81f;
@@ -19,7 +18,6 @@ public class PlaMovm : MonoBehaviour
 
     void Start()
     {
-        animator = GetComponentInChildren<Animator>();
     }
     // Update is called once per frame
     void Update()
@@ -48,19 +46,6 @@ public class PlaMovm : MonoBehaviour
 
         controller.Move(velocity * Time.deltaTime);
 
-        float currentSpeed = controller.velocity.magnitude;
-
-        if (currentSpeed > 0)
-        {
-            animator.SetBool("isWalking", true);
-        }
-        else
-        {
-            animator.SetBool("isWalking", false);
-        }
-
-
-        animator.SetBool("isGrounded", isGrounded);
     }
 
 

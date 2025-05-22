@@ -18,6 +18,8 @@ namespace JusticeScale.Scripts.Scales
 
 
 
+
+
         private void Start()
         {
             // Initialize the object container at the start
@@ -25,6 +27,7 @@ namespace JusticeScale.Scripts.Scales
             _objectContainer.transform.parent = transform;
             rightObject = false;
         }
+
 
         private void OnTriggerEnter(Collider other)
         {
@@ -36,7 +39,7 @@ namespace JusticeScale.Scripts.Scales
                 // Round the total weight to 2 decimal places
                 weight = Mathf.Round(weight * 100f) / 100f;
 
-                if(other.tag == "Piuma")
+                if (other.tag == "Piuma")
                 {
                     rightObject = true;
                 }
@@ -82,7 +85,8 @@ namespace JusticeScale.Scripts.Scales
         private void RemoveObjectFromContainer(Transform objectTransform)
         {
             // Unparent the object from the container
-            if (_objectContainer != null) objectTransform.parent = null;
+            if (_objectContainer != null)
+                objectTransform.parent = null;
 
             // Destroy the container if it has no child objects left
             //if (_objectContainer.transform.childCount == 0) Destroy(_objectContainer);
