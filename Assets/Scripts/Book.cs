@@ -3,7 +3,7 @@ using UnityEngine;
 public class Book : Interactable
 {
     PlayerUI playerUI;
-    PlayerCam playerCam;
+    MouseLook playerCam;
     [SerializeField] GameObject uiInfo;
     [SerializeField] GameObject uiBase;
     SettingsManager settingsManager;
@@ -12,7 +12,7 @@ public class Book : Interactable
     {
         playerUI = FindAnyObjectByType<PlayerUI>();
         settingsManager = FindAnyObjectByType<SettingsManager>();
-        playerCam = FindAnyObjectByType<PlayerCam>();
+        playerCam = FindAnyObjectByType<MouseLook>();
         uiInfo.SetActive(false);
     }
 

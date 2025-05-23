@@ -5,11 +5,9 @@ TagManager:
   serializedVersion: 3
   tags:
   - Piuma
-  - 1
-  - 2
-  - 3
-  - 4
-  - 5
+  - Spike
+  - Correct
+  - Wrong
   layers:
   - Default
   - TransparentFX

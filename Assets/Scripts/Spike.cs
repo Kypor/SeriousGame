@@ -3,20 +3,22 @@ using UnityEngine;
 public class Spike : MonoBehaviour
 {
     [SerializeField] GameObject playerTP;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    CharacterController characterController;
+
     void Start()
     {
-
+        characterController = FindAnyObjectByType<CharacterController>();
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnTriggerEnter(Collider other)
     {
-
+        characterController.enabled = false;
+        other.transform.position = playerTP.transform.position;
+        characterController.enabled = true;
+        Debug.Log("peope");
     }
 
-    void OnCollisionEnter(Collision collision)
-    {
-        collision.gameObject.transform.position = new Vector3(playerTP.transform.position.x, playerTP.transform.position.y, playerTP.transform.position.z);
-    }
+
+
 }

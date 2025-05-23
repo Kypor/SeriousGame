@@ -5,9 +5,9 @@ public class SettingsManager : MonoBehaviour
 
     public bool inMenu;
     [SerializeField] GameObject settingsPanel;
-    PlayerCam playerCam;
+    //PlayerCam playerCam;
+    MouseLook mouseLook;
 
-    QuestionManager questionManager;
 
 
     void Awake()
@@ -17,15 +17,14 @@ public class SettingsManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerCam = FindAnyObjectByType<PlayerCam>();
-        playerCam.enabled = true;
-        questionManager = FindAnyObjectByType<QuestionManager>();
+        mouseLook = FindAnyObjectByType<MouseLook>();
+        mouseLook.enabled = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape) && questionManager.questionMenu == false)
+        if(Input.GetKeyDown(KeyCode.Escape))
         {
             if(inMenu)
             {
@@ -42,7 +41,7 @@ public class SettingsManager : MonoBehaviour
     {
        
        inMenu = true;
-       playerCam.enabled = false;
+       mouseLook.enabled = false;
        Time.timeScale = 0;
        settingsPanel.SetActive(true);
 
@@ -53,7 +52,7 @@ public class SettingsManager : MonoBehaviour
     public void CloseMenu()
     {
         inMenu = false;
-        playerCam.enabled = true;
+        mouseLook.enabled = true;
         Time.timeScale = 1;
         settingsPanel.SetActive(false);
 
