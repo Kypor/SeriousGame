@@ -32,7 +32,7 @@ namespace JusticeScale.Scripts.Scales
         private void OnTriggerEnter(Collider other)
         {
             var rb = other.GetComponent<Rigidbody>();
-            if (rb != null && IsInDetectableLayer(other.gameObject) && _detectedObjects.Add(rb.transform))
+            if (rb != null && IsInDetectableLayer(other.gameObject) && _detectedObjects.Add(rb.transform) && other.transform.parent == null)
             {
                 AddObjectToContainer(rb.transform);
                 weight += rb.mass;
@@ -63,7 +63,7 @@ namespace JusticeScale.Scripts.Scales
                 }
 
 
-                RemoveObjectFromContainer(rb.transform);
+                //RemoveObjectFromContainer(rb.transform);
 
             }
         }

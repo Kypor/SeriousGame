@@ -17,7 +17,17 @@ public class ScaleProva : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        if (other.transform.parent == null)
+        {
+            other.transform.parent = this.transform;
+        }
+
         if (other.tag == "Piuma" && other.transform.parent == null)
             timelineManager.AnubisTimeline();
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        Debug.Log("Uscito");
     }
 }
