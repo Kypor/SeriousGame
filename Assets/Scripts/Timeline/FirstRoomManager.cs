@@ -6,10 +6,13 @@ public class FirstRoomManager : MonoBehaviour
     [SerializeField] GameObject ui;
     [SerializeField] GameObject player;
     [SerializeField] GameObject timeline;
+    PlaMovm plaMovm;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         settingsManager = FindAnyObjectByType<SettingsManager>();
+        plaMovm = FindAnyObjectByType<PlaMovm>();
     }
 
     public void StartCutscene()
@@ -27,6 +30,16 @@ public class FirstRoomManager : MonoBehaviour
         ui.SetActive(true);
         player.SetActive(true);
         timeline.SetActive(false);
-        
+
+    }
+
+    public void LockPlayerControl()
+    {
+        plaMovm.enabled = false;
+    }
+
+    public void UnlockPlayerControl()
+    {
+        plaMovm.enabled = true;
     }
 }

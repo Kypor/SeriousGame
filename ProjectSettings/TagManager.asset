@@ -8,6 +8,11 @@ TagManager:
   - Spike
   - Correct
   - Wrong
+  - Locked
+  - Rosso
+  - Blu
+  - Verde
+  - Chiave
   layers:
   - Default
   - TransparentFX

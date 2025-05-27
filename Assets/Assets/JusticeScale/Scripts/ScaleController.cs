@@ -48,7 +48,7 @@ namespace JusticeScale.Scripts
             }
             
             UpdateBalance();
-            if(leftScale.TotalWeight == 1 && rightScale.TotalWeight == 1 && rightScale.rightObject == true)
+            if(WeightDifference == 0 && (rightScale.rightObject == true || leftScale.rightObject == true))
             {
                 timelineManager.AnubisTimeline();
             }

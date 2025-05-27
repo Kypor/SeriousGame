@@ -45,6 +45,22 @@ public class PickupController : MonoBehaviour
         {
             //MoveObj
             MoveObject();
+            if (heldObj.tag == "Chiave")
+            {
+                RaycastHit hit;
+                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, pickupRange, interactLayer))
+                {
+                    if (hit.collider.GetComponent<Bara>() != null && hit.collider.tag == "Locked")
+                    {
+                        Bara bara = hit.collider.GetComponent<Bara>();
+                        playerUI.UpdateText("[E] Usa chiave");
+                        if (Input.GetKeyDown(KeyCode.E))
+                        {
+                            bara.OpenBara();
+                        }
+                    }
+                }
+            }
             if (Input.GetKeyDown(KeyCode.Q))
             {
                 DropObject();

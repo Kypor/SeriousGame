@@ -11,6 +11,7 @@ public class ParkourLogic : MonoBehaviour
     private Color defaultColor;
 
 
+
     void Start()
     {
         firstRoomManager = FindAnyObjectByType<FirstRoomManager>();
@@ -39,6 +40,8 @@ public class ParkourLogic : MonoBehaviour
                 currentStep++;
                 Debug.Log(currentStep);
 
+
+
                 if (currentStep == sequenceLenght)
                 {
                     Debug.Log("Sequenza corretta");
@@ -60,9 +63,12 @@ public class ParkourLogic : MonoBehaviour
                 currentStep = 0;
                 Debug.Log(currentStep);
             }
+           
 
         }
     }
+
+
 
 
 

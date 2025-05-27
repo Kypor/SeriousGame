@@ -1,7 +1,9 @@
+using System.Collections;
 using UnityEngine;
 
 public class Bara : Interactable
 {
+    PlayerUI playerUI;
     [SerializeField] Animator bara;
     [SerializeField] private string openBara = "OpenBara";
     [SerializeField] private string closeBara = "CloseBara";
@@ -9,6 +11,7 @@ public class Bara : Interactable
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        playerUI = FindAnyObjectByType<PlayerUI>();
         isOpen = false;
     }
 
@@ -20,16 +23,43 @@ public class Bara : Interactable
 
     protected override void Interact()
     {
-        if (isOpen == false)
+        if (this.tag != "Locked")
         {
-            bara.Play(openBara);
-            isOpen = true;
+            if (isOpen == false)
+            {
+                bara.Play(openBara);
+                isOpen = true;
+            }
+            else if (isOpen == true)
+            {
+                bara.Play(closeBara);
+                isOpen = false;
+            }
         }
-        else if (isOpen == true)
+        else
         {
-            bara.Play(closeBara);
-            isOpen = false;
+            Debug.Log("Chiusa");
+            StartCoroutine(ShowText(3f));
         }
-        
+
+
+    }
+
+    IEnumerator ShowText(float delay)
+    {
+        float timer = delay;
+        while (timer > 0)
+        {
+            playerUI.UpdateText("La bara è chiusa");
+            yield return null;
+            timer -= Time.deltaTime;
+        }
+
+    }
+
+    public void OpenBara()
+    {
+        this.tag = "Untagged";
+        bara.Play(openBara);
     }
 }
