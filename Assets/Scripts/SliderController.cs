@@ -18,14 +18,20 @@ public class SliderController : MonoBehaviour
         slider = GetComponent<Slider>();
         slider.minValue = 1f;
         slider.maxValue = 2000f;
-        slider.value = mouseLook.mouseSensitivity;
+        //slider.value = mouseLook.mouseSensitivity;
+
+        if (MouseSetting.Instance != null)
+            slider.value = MouseSetting.Instance.mouseSensitivity;
 
         HandleSliderValueChanged();
     }
 
     public void HandleSliderValueChanged()
     {
-        mouseLook.mouseSensitivity = slider.value;
+        //mouseLook.mouseSensitivity = slider.value;
+
+        if (MouseSetting.Instance != null)
+            MouseSetting.Instance.mouseSensitivity = slider.value;
         sensitivityText.SetText(slider.value.ToString(format: "F0"));
     }
 

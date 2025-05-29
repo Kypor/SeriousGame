@@ -15,7 +15,7 @@ public class Piedistallo : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == colore && other.transform.parent == null)
+        if (other.tag == colore)
         {
             colorManager.SetColore(colore, true);
             Debug.Log($"{colore} Si");
