@@ -5,6 +5,7 @@ public class SettingsManager : MonoBehaviour
 
     public bool inMenu;
     [SerializeField] GameObject settingsPanel;
+    [SerializeField] AudioSource music;
     //PlayerCam playerCam;
     MouseLook mouseLook;
 
@@ -24,9 +25,9 @@ public class SettingsManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if(inMenu)
+            if (inMenu)
             {
                 CloseMenu();
             }
@@ -39,18 +40,19 @@ public class SettingsManager : MonoBehaviour
 
     public void OpenMenu()
     {
-       
-       inMenu = true;
-       mouseLook.enabled = false;
-       Time.timeScale = 0;
-       settingsPanel.SetActive(true);
+        music.Pause();
+        inMenu = true;
+        mouseLook.enabled = false;
+        Time.timeScale = 0;
+        settingsPanel.SetActive(true);
 
-       Cursor.visible = true;
-       Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     public void CloseMenu()
     {
+        music.UnPause();
         inMenu = false;
         mouseLook.enabled = true;
         Time.timeScale = 1;
@@ -60,5 +62,5 @@ public class SettingsManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    
+
 }

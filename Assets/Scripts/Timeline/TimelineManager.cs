@@ -11,6 +11,7 @@ public class TimelineManager : MonoBehaviour
     [SerializeField] GameObject beginningTimeline;
     [SerializeField] GameObject anubisDialogue;
     [SerializeField] GameObject nero;
+    [SerializeField] AudioSource music;
 
     [Header("Anubis Glowing Eye")]
     [SerializeField] GameObject anubisTimeline;
@@ -36,6 +37,7 @@ public class TimelineManager : MonoBehaviour
 
     public void AnubisTimeline()
     {
+        music.Pause();
         settingsManager.enabled = false;
         ui.SetActive(false);
         heartAudio.Pause();
@@ -54,6 +56,7 @@ public class TimelineManager : MonoBehaviour
 
     public void EndFirstCutscene()
     {
+        music.Play();
         nero.SetActive(false);
         anubisDialogue.SetActive(false);
         player.SetActive(true);
