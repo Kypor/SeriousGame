@@ -4,6 +4,8 @@ public class MouseSetting : MonoBehaviour
 {
     public static MouseSetting Instance;
     public float mouseSensitivity = 100f;
+    public float musicVolume;
+    public float sfxVolume;
 
     private void Awake()
     {

@@ -1,12 +1,17 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class FirstRoomManager : MonoBehaviour
 {
     private SettingsManager settingsManager;
+    [SerializeField] GameObject startTimeline;
     [SerializeField] GameObject ui;
     [SerializeField] GameObject player;
-    [SerializeField] GameObject timeline;
+    [SerializeField] GameObject timeline1;
+
+    [SerializeField] GameObject timeline2;
     [SerializeField] AudioSource music;
     PlaMovm plaMovm;
     MouseLook mouseLook;
@@ -30,7 +35,7 @@ public class FirstRoomManager : MonoBehaviour
         settingsManager.enabled = false;
         ui.SetActive(false);
         player.SetActive(false);
-        timeline.SetActive(true);
+        timeline1.SetActive(true);
 
     }
 
@@ -40,7 +45,7 @@ public class FirstRoomManager : MonoBehaviour
         settingsManager.enabled = true;
         ui.SetActive(true);
         player.SetActive(true);
-        timeline.SetActive(false);
+        timeline1.SetActive(false);
 
     }
 
@@ -56,5 +61,18 @@ public class FirstRoomManager : MonoBehaviour
         mouseLook.enabled = true;
         music.Play();
         settingsManager.enabled = true;
+        startTimeline.SetActive(false);
+    }
+
+    public void FallTrapStart()
+    {
+        music.Pause();
+        settingsManager.enabled = false;
+        timeline2.SetActive(true);
+    }
+
+    public void NextRoom()
+    {
+        SceneManager.LoadScene("SecondRoom");
     }
 }

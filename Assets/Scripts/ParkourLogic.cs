@@ -4,6 +4,9 @@ using UnityEngine;
 public class ParkourLogic : MonoBehaviour
 {
     FirstRoomManager firstRoomManager;
+    [SerializeField] AudioSource sfx;
+    [SerializeField] AudioClip rightSound;
+    [SerializeField] AudioClip wrongSound;
 
     private int currentStep = 0;
     private int sequenceLenght;
@@ -25,6 +28,7 @@ public class ParkourLogic : MonoBehaviour
     }
 
 
+
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
         if (currentStep < sequenceLenght)
@@ -35,6 +39,8 @@ public class ParkourLogic : MonoBehaviour
                 if (text != null)
                 {
                     text.color = Color.green;
+                    sfx.clip = rightSound;
+                    sfx.Play();
                 }
 
                 currentStep++;
@@ -51,19 +57,27 @@ public class ParkourLogic : MonoBehaviour
             }
             else if (hit.gameObject.tag == "Wrong")
             {
+                if (currentStep != 0)
+                {
+                    sfx.clip = wrongSound;
+                    sfx.PlayOneShot(wrongSound);
+                }
                 foreach (GameObject rock in rocks)
                 {
                     var text = rock.gameObject.GetComponentInChildren<TextMeshProUGUI>();
                     if (text != null)
                     {
                         text.color = defaultColor;
+
                     }
                 }
+
+
 
                 currentStep = 0;
                 Debug.Log(currentStep);
             }
-           
+
 
         }
     }
