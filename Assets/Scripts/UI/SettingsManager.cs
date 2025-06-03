@@ -40,7 +40,7 @@ public class SettingsManager : MonoBehaviour
 
     public void OpenMenu()
     {
-        music.Pause();
+        //music.Pause();
         inMenu = true;
         mouseLook.enabled = false;
         Time.timeScale = 0;
@@ -52,7 +52,7 @@ public class SettingsManager : MonoBehaviour
 
     public void CloseMenu()
     {
-        music.UnPause();
+        //music.UnPause();
         inMenu = false;
         mouseLook.enabled = true;
         Time.timeScale = 1;
