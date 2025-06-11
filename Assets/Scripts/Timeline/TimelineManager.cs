@@ -2,10 +2,13 @@ using JusticeScale.Scripts.Scales;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class TimelineManager : MonoBehaviour
 {
+    [Header("StartGame")]
+    [SerializeField] GameObject startTimeline;
 
     [Header("Beginning")]
     [SerializeField] GameObject beginningTimeline;
@@ -20,13 +23,25 @@ public class TimelineManager : MonoBehaviour
 
 
     [SerializeField] GameObject ui;
+    PlaMovm plaMovm;
+    MouseLook mouseLook;
 
 
     private SettingsManager settingsManager;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        plaMovm = FindAnyObjectByType<PlaMovm>();
+        mouseLook = FindAnyObjectByType<MouseLook>();
         settingsManager = FindAnyObjectByType<SettingsManager>();
+
+        plaMovm.enabled = false;
+        mouseLook.enabled = false;
+        settingsManager.enabled = false;
+
+
+        ui.SetActive(false);
+
     }
 
     // Update is called once per frame
@@ -69,6 +84,15 @@ public class TimelineManager : MonoBehaviour
     public void LoadScene()
     {
         SceneManager.LoadScene("FirstRoom");
+    }
+
+    public void StartGame()
+    {
+        startTimeline.SetActive(false);
+        ui.SetActive(true);
+        plaMovm.enabled = true;
+        mouseLook.enabled = true;
+        settingsManager.enabled = true;
     }
 
 }

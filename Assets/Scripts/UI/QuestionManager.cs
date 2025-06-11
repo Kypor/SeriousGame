@@ -4,119 +4,170 @@ using UnityEngine;
 
 public class QuestionManager : MonoBehaviour
 {
+    [SerializeField] GameObject player;
+    [SerializeField] GameObject ui;
 
     [SerializeField] GameObject questionPanel;
-    PlayerCam playerCam;
+    [SerializeField] GameObject[] questions;
+    [SerializeField] TextMeshProUGUI correctWrongText;
 
-    [SerializeField] GameObject correctText;
-    [SerializeField] GameObject wrongText;
+    [Header("TimelineFinali")]
+    [SerializeField] GameObject goodEnding;
+    [SerializeField] GameObject badEnding;
 
-    PlayerMovement playerMovement;
+    MouseLook playerCam;
+
+    PlaMovm playerMovement;
+    SettingsManager settingsManager;
 
     public int questionStatus;
 
     public int numberRight;
     public int numberWrong;
+    private bool finishQuestion = false;
 
-    public bool questionMenu;
 
 
     void Awake()
     {
         questionPanel.SetActive(false);
-        correctText.SetActive(false);
-        wrongText.SetActive(false);
         questionStatus = 0;
     }
     // Start is called before the first frame update
     void Start()
     {
+        finishQuestion = false;
         numberRight = numberWrong = 0;
-        playerMovement = FindAnyObjectByType<PlayerMovement>();
-        playerCam = FindAnyObjectByType<PlayerCam>();
-        playerCam.enabled = true;
-        questionMenu = false;
-        
+        settingsManager = FindAnyObjectByType<SettingsManager>();
+        playerMovement = FindAnyObjectByType<PlaMovm>();
+        playerCam = FindAnyObjectByType<MouseLook>();
+
+        questions[questionStatus].SetActive(false);
+        correctWrongText.SetText("");
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        // if (Input.GetKeyDown(KeyCode.P))
+        // {
+        //     settingsManager.enabled = false;
+        //     player.SetActive(false);
+        //     ui.SetActive(false);
+        //     goodEnding.SetActive(true);
+        //     finishQuestion = false;
+        // }
+        if (finishQuestion == true)
+        {
+            CloseMenu();
+            questionPanel.SetActive(false);
+            if (numberRight >= numberWrong + 1)
+            {
+                Debug.Log("Good Ending");
+                settingsManager.enabled = false;
+                player.SetActive(false);
+                ui.SetActive(false);
+                goodEnding.SetActive(true);
+                finishQuestion = false;
+            }
+            else
+            {
+                settingsManager.enabled = false;
+                player.SetActive(false);
+                ui.SetActive(false);
+                badEnding.SetActive(true);
+                Debug.Log("Bad Ending");
+                finishQuestion = false;
+            }
+
+
+        }
     }
 
     public void OpenMenu()
     {
-        
-       playerCam.enabled = false;
-       playerMovement.enabled = false;
-       //Time.timeScale = 0;
-       questionPanel.SetActive(true);
-       correctText.SetActive(false);
-       wrongText.SetActive(false);
 
-       Cursor.visible = true;
-       Cursor.lockState = CursorLockMode.None;
+        playerCam.enabled = false;
+        playerMovement.enabled = false;
+        settingsManager.enabled = false;
 
-       questionMenu = true;
+        questionPanel.SetActive(true);
+        questions[questionStatus].SetActive(true);
+
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+
+
     }
 
     public void CloseMenu()
     {
         playerCam.enabled = true;
         playerMovement.enabled = true;
-        //Time.timeScale = 1;
+        settingsManager.enabled = true;
         questionPanel.SetActive(false);
+
 
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
-        questionMenu = false;
     }
 
     public void RightAnswer()
     {
         StartCoroutine(RightAnswerCoroutine());
-        questionStatus = 1;
+
+
         numberRight++;
-        Debug.Log(numberRight);
+        if (numberRight == 3)
+            finishQuestion = true;
 
     }
 
     IEnumerator RightAnswerCoroutine()
     {
-        Debug.Log("Risposta giusta");
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        correctText.SetActive(true);
-        
-        yield return new WaitForSeconds(2f);
-        
 
-        CloseMenu();
-        
+
+        questionStatus++;
+
+        correctWrongText.color = Color.green;
+        correctWrongText.SetText("Risposta esatta!");
+
+
+
+
+        yield return new WaitForSeconds(2f);
+
+        correctWrongText.SetText("");
+
+        questions[questionStatus - 1].SetActive(false);
+        questions[questionStatus].SetActive(true);
+
+
+
     }
 
     public void WrongAnswer()
     {
         StartCoroutine(WrongAnswerCoroutine());
-        questionStatus = -1;
         numberWrong++;
-        Debug.Log(numberWrong);
+
     }
 
     IEnumerator WrongAnswerCoroutine()
     {
-        Debug.Log("Risposta sbagliata");
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        wrongText.SetActive(true);
-        
-        yield return new WaitForSeconds(2f);
-        
 
-        CloseMenu();
+
+        correctWrongText.color = Color.red;
+        correctWrongText.SetText("Risposta sbagliata...");
+
+        yield return new WaitForSeconds(2f);
+
+        correctWrongText.SetText("");
+
     }
 
-    
+
 }

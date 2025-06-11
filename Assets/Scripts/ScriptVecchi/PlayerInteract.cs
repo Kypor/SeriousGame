@@ -45,7 +45,7 @@ public class PlayerInteract : MonoBehaviour
         if(Physics.Raycast(origin, forward, out RaycastHit hit, raycastDistance, interactable))
         {
             //Debug.Log("Interazione");
-            if(inHand == false && playerMovement.grounded == true && questionManager.questionMenu == false)
+            if(inHand == false && playerMovement.grounded == true)
             {
                 if(hit.collider.GetComponent<Interactable>() != null)
                 {

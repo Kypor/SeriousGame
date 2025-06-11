@@ -12252,8 +12252,8 @@ MonoBehaviour:
   audioMixer: {fileID: 24100000, guid: 54f48bb5ec71a7a4db77d82cd015a77f, type: 2}
   sliderTextMusic: {fileID: 357288787}
   sliderVolume: {fileID: 550442817}
-  sliderTextSFX: {fileID: 0}
-  sliderSFX: {fileID: 0}
+  sliderTextSFX: {fileID: 318143403}
+  sliderSFX: {fileID: 1382747300}
 --- !u!114 &550442817
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33252,8 +33252,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: 54f48bb5ec71a7a4db77d82cd015a77f, type: 2}
-  sliderTextMusic: {fileID: 0}
-  sliderVolume: {fileID: 0}
+  sliderTextMusic: {fileID: 357288787}
+  sliderVolume: {fileID: 550442817}
   sliderTextSFX: {fileID: 318143403}
   sliderSFX: {fileID: 1382747300}
 --- !u!114 &1382747300
