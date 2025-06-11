@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class QuestionManager : MonoBehaviour
 {
+    [SerializeField] AudioSource music;
     [SerializeField] GameObject player;
     [SerializeField] GameObject ui;
 
@@ -67,6 +68,7 @@ public class QuestionManager : MonoBehaviour
             {
                 Debug.Log("Good Ending");
                 settingsManager.enabled = false;
+                music.Stop();
                 player.SetActive(false);
                 ui.SetActive(false);
                 goodEnding.SetActive(true);
@@ -74,6 +76,7 @@ public class QuestionManager : MonoBehaviour
             }
             else
             {
+                music.Stop();
                 settingsManager.enabled = false;
                 player.SetActive(false);
                 ui.SetActive(false);

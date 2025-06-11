@@ -5928,6 +5928,7 @@ GameObject:
   - component: {fileID: 341616891}
   - component: {fileID: 341616890}
   - component: {fileID: 341616889}
+  - component: {fileID: 341616892}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -5943,13 +5944,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 341616887}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: 0, y: 8, z: -46.181}
+  m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: 3.74, z: -41.87}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 344265853}
-  m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -5, z: 0}
 --- !u!114 &341616889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6053,6 +6054,28 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!95 &341616892
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 341616887}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &344265852
 GameObject:
   m_ObjectHideFlags: 0
@@ -6142,6 +6165,8 @@ PlayableDirector:
     value: {fileID: 344265855}
   - key: {fileID: 8144378821412359833, guid: fed6f40fafdc796448e419ad11d1b543, type: 2}
     value: {fileID: 1224365624}
+  - key: {fileID: 6816822458904242113, guid: fed6f40fafdc796448e419ad11d1b543, type: 2}
+    value: {fileID: 341616892}
   m_ExposedReferences:
     m_References: []
 --- !u!114 &344265855
@@ -20293,7 +20318,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4146510530998729193, guid: 5b97894ac8ced674c8196210dccdbe34, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.109630466
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4146510530998729193, guid: 5b97894ac8ced674c8196210dccdbe34, type: 3}
       propertyPath: m_LocalPosition.y
@@ -27051,6 +27076,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56d9d2a2de2f8d042a24d35ac49001bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  music: {fileID: 534373154}
   player: {fileID: 137353625}
   ui: {fileID: 1426422480}
   questionPanel: {fileID: 687649800}
