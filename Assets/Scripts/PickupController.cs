@@ -1,13 +1,16 @@
+using JusticeScale.Scripts.Scales;
 using UnityEngine;
 
 public class PickupController : MonoBehaviour
 {
     private PlayerUI playerUI;
+    [SerializeField] GameObject leaveObjectText;
     [Header("Pickup Settings")]
     [SerializeField] Transform holdArea;
     private GameObject heldObj;
     private Rigidbody heldObjRB;
     public LayerMask interactLayer;
+    public LayerMask scaleLayer;
 
     [Header("Physics Parameters")]
     [SerializeField] private float pickupRange = 5.0f;
@@ -16,6 +19,7 @@ public class PickupController : MonoBehaviour
     private void Start()
     {
         playerUI = FindAnyObjectByType<PlayerUI>();
+        leaveObjectText.SetActive(false);
     }
 
     private void Update()
@@ -61,6 +65,40 @@ public class PickupController : MonoBehaviour
                     }
                 }
             }
+            RaycastHit hitScale;
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hitScale, pickupRange, scaleLayer))
+            {
+                if (hitScale.collider.GetComponent<TriggerScale>() != null)
+                {
+                    if (hitScale.collider.tag == "Left")
+                    {
+                        var leftScaleScript = hitScale.collider.GetComponent<TriggerScale>();
+                        if (leftScaleScript.onScale == false)
+                        {
+                            playerUI.UpdateText("[F] Metti sulla bilancia");
+                            if (Input.GetKeyDown(KeyCode.F))
+                            {
+                                DropOnScale(leftScaleScript);
+                            }
+                        }
+                    }
+
+                    else if (hitScale.collider.tag == "Right")
+                    {
+                        var rightScaleScript = hitScale.collider.GetComponent<TriggerScale>();
+                        if (rightScaleScript.onScale == false)
+                        {
+                            playerUI.UpdateText("[F] Metti sulla bilancia");
+                            if (Input.GetKeyDown(KeyCode.F))
+                            {
+                                DropOnScale(rightScaleScript);
+                            }
+                        }
+                    }
+
+
+                }
+            }
             if (Input.GetKeyDown(KeyCode.Q))
             {
                 DropObject();
@@ -81,6 +119,7 @@ public class PickupController : MonoBehaviour
     {
         if (pickObj.GetComponent<Rigidbody>())
         {
+            leaveObjectText.SetActive(true);
             //pickObj.layer = LayerMask.NameToLayer("Grabbed");
             pickObj.transform.rotation = holdArea.transform.rotation;
             heldObjRB = pickObj.GetComponent<Rigidbody>();
@@ -95,8 +134,9 @@ public class PickupController : MonoBehaviour
         }
     }
 
-    void DropObject()
+    void DropObject(Vector3? dropPosition = null)
     {
+        leaveObjectText.SetActive(false);
         //heldObj.layer = LayerMask.NameToLayer("Interactable");
         heldObjRB.useGravity = true;
         heldObjRB.linearDamping = 1;
@@ -104,9 +144,26 @@ public class PickupController : MonoBehaviour
         heldObjRB.constraints = RigidbodyConstraints.None;
         heldObjRB.angularDamping = 0.05f;
 
+        if (dropPosition.HasValue)
+        {
+            heldObj.transform.position = dropPosition.Value;
+            heldObjRB.linearVelocity = Vector3.zero;
+            heldObjRB.angularVelocity = Vector3.zero;
+        }
+
         heldObj.transform.parent = null;
         heldObj = null;
 
+    }
+
+    void DropOnScale(TriggerScale triggerScale)
+    {
+        //Vector3 dropPos = triggerScale.GetComponent<Collider>().bounds.center + Vector3.up * 0.3f;
+        Vector3 dropPos = triggerScale.dropPosition.position;
+
+        var collider = heldObj.GetComponent<Collider>();
+        DropObject(dropPos);
+        triggerScale.OnScaleEnter(collider);
     }
 
 }
